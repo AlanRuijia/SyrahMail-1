@@ -9,7 +9,7 @@
 //C++ Standard Library
 #include <map>
 //Syrah Library
-#include "_syrah_kernel.h"
+#include "E:\Project\QT Projects Temp\email\_syrah_kernel.h"
 
 using namespace std;
 
@@ -49,8 +49,6 @@ public:
     void _set_sender(const QString& var_sender);
     void _set_content(const QByteArray& var_content);
     void _set_to(const QString& var_to);
-
-    QString getSubject() { return subject; }
 };
 
 #endif // _SYRAH_MAIL_H

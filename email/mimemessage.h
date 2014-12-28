@@ -8,7 +8,7 @@
 
 #include "mailbox/_syrah_mail.h"
 #include "_syrah_kernel.h"
-extern class _syrah_mail Mail;
+//extern class _syrah_mail *Mail;
 class MimePart;
 class MimeMessage : public QObject
 {
@@ -43,8 +43,7 @@ public:
     void setContent(MimePart *content);
 
     virtual QString toString();
-
-
+    void store(_syrah_mail *Mail);
 
 
 protected:

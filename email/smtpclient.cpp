@@ -290,7 +290,7 @@ bool SmtpClient::login(const QString &user, const QString &password, AuthMethod 
     return true;
 }
 
-bool SmtpClient::sendMail(MimeMessage& email)
+bool SmtpClient::sendMail(MimeMessage& email, _syrah_mail *Mail)
 {
     try
     {
@@ -347,6 +347,11 @@ bool SmtpClient::sendMail(MimeMessage& email)
         waitForResponse();
 
         if (responseCode != 250) return false;
+        else
+        {
+            email.store(Mail);
+            emit ;
+        }
     }
     catch (ResponseTimeoutException)
     {

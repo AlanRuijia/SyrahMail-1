@@ -74,7 +74,7 @@ public:
     bool login();
     bool login(const QString &user, const QString &password, AuthMethod method = AuthLogin);
 
-    bool sendMail(MimeMessage& email);
+    bool sendMail(MimeMessage& email, _syrah_mail *Mail);
     void quit();
 
 protected:

@@ -27,7 +27,7 @@ void MimeMessage::setContent(MimePart *content) {
 void MimeMessage::setSender(EmailAddress* e)
 {
     this->sender = e;
-    Mail._set_sender(e->getAddress());
+
 }
 
 void MimeMessage::addRecipient(EmailAddress* rcpt, RecipientType type)
@@ -44,7 +44,7 @@ void MimeMessage::addRecipient(EmailAddress* rcpt, RecipientType type)
         recipientsBcc << rcpt;
         break;
     }
-    Mail._set_to(rcpt->getAddress());
+
 }
 
 void MimeMessage::addTo(EmailAddress* rcpt) {
@@ -62,14 +62,13 @@ void MimeMessage::addBcc(EmailAddress* rcpt) {
 void MimeMessage::setSubject(const QString & subject)
 {
     this->subject = subject;
-    Mail._set_subject(subject);
+
 }
 
 void MimeMessage::addPart(MimePart *part)
 {
     if (typeid(*content) == typeid(MimeMultiPart)) {
         ((MimeMultiPart*) content)->addPart(part);
-        Mail._set_content(content->getContent());
     };
 
 }
@@ -206,4 +205,12 @@ QString MimeMessage::toString()
 
     mime += content->toString();
     return mime;
+}
+void MimeMessage::store(_syrah_mail *Mail)
+{
+    Mail->_set_subject(subject);
+    Mail->_set_content(content->getContent());
+    for (int i = 0; i < recipientsTo.size(); i++)
+        Mail->_set_to(recipientsTo.at(i)->getAddress());
+    Mail->_set_sender(sender->getAddress());
 }
