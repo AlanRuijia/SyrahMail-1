@@ -18,6 +18,7 @@
 #include <QLineEdit>
 #include <string>
 #include <QToolBar>
+#include ".\mailbox\_syrah_mail.h"
 namespace Ui {
 class MailWindow;
 }
@@ -29,7 +30,8 @@ class MailWindow : public QWidget
 public:
     explicit MailWindow(QWidget *parent = 0);
     ~MailWindow();
-
+signals:
+    void achievedstore();
 private slots:
     void send();
 private:
@@ -50,6 +52,8 @@ private:
     QAction *var_Font,
             *Size,
             *Color;
+
+     _syrah_mail *Mail;
 
     bool Check();
 };

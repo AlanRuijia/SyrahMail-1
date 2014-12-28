@@ -1,5 +1,4 @@
 #include "mailwindow.h"
-//#include "store.h"
 #include "ui_mailwindow.h"
 #include <iostream>
 #include <QDialog>
@@ -12,11 +11,12 @@
 #include "mimetext.h"
 #include "mimehtml.h"
 
-_syrah_mail Mail;
+
 MailWindow::MailWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MailWindow)
 {
+    Mail=new _syrah_mail;
     ui->setupUi(this);
     var_Sender =new QLabel(tr("Send to: "));
     var_SendLine =new QLineEdit;
@@ -69,6 +69,7 @@ void MailWindow::send()
         smtp.setUser("maorjgs@163.com");
         smtp.setPassword("maoruijia");
 
+        QObject::connect(&smtp,SIGNAL(sendsuccess()),this,SIGNAL(achievedstore()));
         //构建邮件主题,包含发件人收件人附件等.
         MimeMessage message;
         message.setSender(new EmailAddress("maorjgs@163.com"));
@@ -111,7 +112,7 @@ void MailWindow::send()
             QMessageBox::critical(this,"Error","The Login failed.");
             return;
         }
-        if (!smtp.sendMail(message)){
+        if (!smtp.sendMail(message,Mail)){
             QMessageBox::critical(this,"Error","The sending process failed.");
             return;
         }else{

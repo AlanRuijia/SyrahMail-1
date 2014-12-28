@@ -74,7 +74,7 @@ public:
     bool login();
     bool login(const QString &user, const QString &password, AuthMethod method = AuthLogin);
 
-    bool sendMail(MimeMessage& email, _syrah_mail *Mail);
+    bool sendMail(MimeMessage& email,_syrah_mail Mail);
     void quit();
 
 protected:
@@ -106,6 +106,7 @@ protected slots:
 
 signals:
     void smtpError(SmtpError e);
+    void sendsuccess();
 
 };
 
